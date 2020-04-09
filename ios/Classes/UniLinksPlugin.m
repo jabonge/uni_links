@@ -77,7 +77,7 @@ static id _instance;
 
 - (void)handleMethodCall:(FlutterMethodCall *)call result:(FlutterResult)result {
   if ([@"getInitialLink" isEqualToString:call.method]) {
-    result(self.initialLink);
+    result(self.latestLink);
     // } else if ([@"getLatestLink" isEqualToString:call.method]) {
     //     result(self.latestLink);
   } else {
@@ -88,7 +88,7 @@ static id _instance;
 - (FlutterError *_Nullable)onListenWithArguments:(id _Nullable)arguments
                                        eventSink:(nonnull FlutterEventSink)eventSink {
   _eventSink = eventSink;
-  if (_eventSink && _latestLink) _eventSink(_latestLink);                                         
+                                         
   return nil;
 }
 
