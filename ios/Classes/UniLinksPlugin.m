@@ -61,6 +61,7 @@ static id _instance;
   
   if (url) {
     self.latestLink = [url absoluteString];
+    if (_eventSink) _eventSink(self.lastestLink);
   }
   return YES;
 }
