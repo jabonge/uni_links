@@ -59,11 +59,18 @@ static id _instance;
             openURL:(NSURL *)url
             options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options {
   
-  if (url) {
-    self.latestLink = [url absoluteString];
-    if (_eventSink) _eventSink(self.latestLink);
-  }
+//   if (url) {
+//     self.latestLink = [url absoluteString];
+    if (_eventSink) _eventSink('werwerwt');
+//   }
   return YES;
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+//       if (self.latestLink) {
+            if (_eventSink) _eventSink('werwerwt');
+//     if (_eventSink) _eventSink(self.latestLink);
+//   }
 }
 
 - (BOOL)application:(UIApplication *)application
