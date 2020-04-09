@@ -59,8 +59,9 @@ static id _instance;
             openURL:(NSURL *)url
             options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options {
   
-  self.latestLink = [url absoluteString];
-  if(_eventSink && self.latestLink) _eventSink(self.latestLink);
+  if (url) {
+    self.latestLink = [url absoluteString];
+  }
   return YES;
 }
 
@@ -90,6 +91,7 @@ static id _instance;
 - (FlutterError *_Nullable)onListenWithArguments:(id _Nullable)arguments
                                        eventSink:(nonnull FlutterEventSink)eventSink {
   _eventSink = eventSink;
+                                    
                                          
   return nil;
 }
