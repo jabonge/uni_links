@@ -55,22 +55,35 @@ static id _instance;
   return YES;
 }
 
-- (BOOL)application:(UIApplication *)application
+
+
+// - (void)applicationDidBecomeActive:(UIApplication *)application {
+// //       if (self.latestLink) {
+            
+//     if (_eventSink) _eventSink(self.latestLink);
+// //   }
+// }
+- (BOOL)application:(UIApplication *)app
             openURL:(NSURL *)url
-            options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options {
-  
-//   if (url) {
-    self.latestLink = [url absoluteString];
-          if (_eventSink) _eventSink(self.latestLink);
-//   }
-  return YES;
+            options:(NSDictionary<NSString *, id> *)options {
+  return [self application:app
+                   openURL:url
+         sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
+                annotation:options[UIApplicationOpenURLOptionsAnnotationKey]];
 }
 
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-//       if (self.latestLink) {
-            
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+  
+
+  if (url) {
+    self.latestLink = [url absoluteString];
     if (_eventSink) _eventSink(self.latestLink);
-//   }
+    return YES;
+  }
+  return NO;
 }
 
 - (BOOL)application:(UIApplication *)application
