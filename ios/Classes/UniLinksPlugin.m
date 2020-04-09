@@ -60,16 +60,16 @@ static id _instance;
             options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options {
   
 //   if (url) {
-//     self.latestLink = [url absoluteString];
-    if (_eventSink) _eventSink('werwerwt');
+    self.latestLink = [url absoluteString];
+          if (_eventSink) _eventSink(self.latestLink);
 //   }
   return YES;
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
 //       if (self.latestLink) {
-            if (_eventSink) _eventSink('werwerwt');
-//     if (_eventSink) _eventSink(self.latestLink);
+            
+    if (_eventSink) _eventSink(self.latestLink);
 //   }
 }
 
