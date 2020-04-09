@@ -72,8 +72,8 @@ static id _instance;
 //     if (!_eventSink) {
 //       self.initialLink = self.latestLink;
 //     }
-    return YES;
-  }
+//     return YES;
+//   }
   return NO;
 }
 
