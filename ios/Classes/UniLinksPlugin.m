@@ -56,48 +56,27 @@ static id _instance;
 }
 
 
-
-// - (void)applicationDidBecomeActive:(UIApplication *)application {
-// //       if (self.latestLink) {
-            
-//     if (_eventSink) _eventSink(self.latestLink);
-// //   }
-// }
-- (BOOL)application:(UIApplication *)app
-            openURL:(NSURL *)url
-            options:(NSDictionary<NSString *, id> *)options {
-  return [self application:app
-                   openURL:url
-         sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
-                annotation:options[UIApplicationOpenURLOptionsAnnotationKey]];
-}
-
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
-  sourceApplication:(NSString *)sourceApplication
-         annotation:(id)annotation {
-  
-
+            options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options {
   if (url) {
     self.latestLink = [url absoluteString];
-    if (_eventSink) _eventSink(self.latestLink);
-    return YES;
   }
-  return NO;
+  return YES;
 }
 
 - (BOOL)application:(UIApplication *)application
     continueUserActivity:(NSUserActivity *)userActivity
       restorationHandler:(void (^)(NSArray *_Nullable))restorationHandler {
-//   if ([userActivity.activityType isEqualToString:NSUserActivityTypeBrowsingWeb]) {
-//     self.latestLink = [userActivity.webpageURL absoluteString];
-//     if (!_eventSink) {
-//       self.initialLink = self.latestLink;
-//     }
-//     return YES;
-//   }
+  if ([userActivity.activityType isEqualToString:NSUserActivityTypeBrowsingWeb] && userActivity.webpageURL) {
+    self.latestLink = [userActivity.webpageURL absoluteString];
+    return YES;
+  }
   return NO;
 }
+
+
+
 
 - (void)handleMethodCall:(FlutterMethodCall *)call result:(FlutterResult)result {
   if ([@"getInitialLink" isEqualToString:call.method]) {
